@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>카레 레시피 영어 퀴즈</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff9eb;color:#24221b;font:1rem/1.65 system-ui,sans-serif}main{max-width:52rem;margin:auto;padding:clamp(1rem,4vw,3rem)}header{background:#ffca57;border-radius:1.4rem;padding:clamp(1.25rem,5vw,2.5rem)}header p,h1{margin:0}h1{font-size:clamp(2rem,7vw,3.4rem);line-height:1.15;letter-spacing:-.045em}header p{margin-top:.7rem}.card{background:white;border:1px solid #ebdec2;border-radius:1.25rem;padding:clamp(1rem,4vw,2rem);margin-top:1rem}h2{margin:0 0 .65rem;font-size:1.25rem}.passage{font-size:1.13rem;line-height:1.75}.passage p{margin:.65rem 0}.marked{background:#fff1c9;border-radius:.25rem;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:.07em .15em}fieldset{border:0;padding:0;margin:0}legend{font-weight:750;font-size:1.2rem;padding:0;margin-bottom:.75rem}.choices{display:grid;grid-template-columns:repeat(6,1fr);gap:.55rem}label{display:flex;min-height:3.2rem;align-items:center;justify-content:center;gap:.3rem;border:1px solid #9e9279;border-radius:.7rem;cursor:pointer;font-size:1.16rem}label:has(:checked){background:#ffe39c;border-color:#644600}input{width:1rem;height:1rem;accent-color:#684800;margin:0}button{font:inherit;font-weight:750;border:0;border-radius:.7rem;padding:.75rem 1.2rem;min-height:3rem;cursor:pointer;background:#342404;color:white}button:disabled{opacity:.55;cursor:default}.submit{width:100%;margin-top:1rem}button:focus-visible,input:focus-visible{outline:3px solid #a24a00;outline-offset:3px}#result{border-left:5px solid #c47f00}#result ul{padding-left:1.45rem}#result li{margin:.4rem 0}#result p{margin:.5rem 0}#retry{margin-top:.5rem}@media(max-width:520px){.choices{grid-template-columns:repeat(3,1fr)}}
+</style>
+<main>
+<header><h1 lang="en">How to Make Curry</h1><p>중1 영어 · 접속사 <b lang="en">when</b></p></header>
+<section class="card" aria-labelledby="reading">
+<h2 id="reading">카레 레시피 읽기</h2>
+<div class="passage" lang="en">
+<p>Do you know how to make curry? I’ll show you my simple recipe. First, cut onions, beef, potatoes, and carrots in cubes.</p>
+<p><span class="marked">① When is the pot hot</span>, add the onions and fry them. <span class="marked">② When the onions are ready</span>, add the meat and fry it. Add potatoes and carrots <span class="marked">③ when is the meat ready</span> and fry them.</p>
+<p><span class="marked">④ When they are ready</span>, put water in the pot. <span class="marked">⑤ When boils the water</span>, add curry powder. Boil for 5 more minutes. You can have a delicious meal <span class="marked">⑥ when the curry is done</span>!</p>
+</div></section>
+<form class="card" id="quiz">
+<fieldset id="answers"><legend><span lang="en">when</span>절의 어순이 틀린 곳을 모두 고르세요.</legend>
+<div class="choices"><label><input type="checkbox" value="1" aria-label="1번">①</label><label><input type="checkbox" value="2" aria-label="2번">②</label><label><input type="checkbox" value="3" aria-label="3번">③</label><label><input type="checkbox" value="4" aria-label="4번">④</label><label><input type="checkbox" value="5" aria-label="5번">⑤</label><label><input type="checkbox" value="6" aria-label="6번">⑥</label></div></fieldset>
+<button class="submit" type="submit" disabled>제출하기</button>
+</form>
+<section class="card" id="result" aria-labelledby="feedback" hidden>
+<h2 id="feedback" tabindex="-1"></h2>
+<p id="selected"></p><p><strong>정답 ① · ③ · ⑤</strong></p>
+<ul lang="en"><li>① When <b>the pot is hot</b></li><li>③ when <b>the meat is ready</b></li><li>⑤ When <b>the water boils</b></li></ul>
+<p>이 지문에서 ‘~할 때’를 뜻하는 <b lang="en">when</b>절은 <strong>when + 주어 + 동사</strong> 순서로 써요.</p>
+<button type="button" id="retry">다시 풀기</button>
+</section></main>
+<script>
+const form = document.querySelector('#quiz');
+const answers = document.querySelector('#answers');
+const submit = form.querySelector('button');
+const result = document.querySelector('#result');
+const feedback = document.querySelector('#feedback');
+const choices = [...form.querySelectorAll('input')];
+const picked = () => choices.filter(choice => choice.checked).map(choice => choice.value);
+form.addEventListener('change', () => { submit.disabled = picked().length === 0; });
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const selected = picked();
+  if (!selected.length || answers.disabled) return;
+  feedback.textContent = selected.join(',') === '1,3,5' ? '모두 맞았어요!' : '정답과 비교해 보세요.';
+  document.querySelector('#selected').textContent = '내가 고른 답 ' + selected.map(number => '①②③④⑤⑥'[number - 1]).join(' · ');
+  answers.disabled = true;
+  submit.disabled = true;
+  result.hidden = false;
+  feedback.focus();
+  result.scrollIntoView({block:'nearest'});
+});
+document.querySelector('#retry').addEventListener('click', () => {
+  form.reset();
+  answers.disabled = false;
+  submit.disabled = true;
+  result.hidden = true;
+  choices[0].focus();
+});
+</script></html>
