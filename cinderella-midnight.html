@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>자정의 무도회 · 신데렐라 영어 게임</title>
+<style>
+:root{color-scheme:dark;--night:#18152f;--panel:#25203e;--ink:#fff5e6;--muted:#d3c5e5;--gold:#ffd48c;--edge:#655578}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#46416f 0,transparent 52%),var(--night);font:1rem/1.5 system-ui,sans-serif;color:var(--ink)}main{width:min(62rem,100% - 1.5rem);margin:auto;padding:1.25rem 0 2rem}header{color:var(--gold);font-weight:800;margin-bottom:.65rem}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:.8rem;align-items:start}.card,.scene{padding:clamp(.85rem,2.2vw,1.4rem);border:1px solid var(--edge);border-radius:1.2rem;background:var(--panel)}.scene{background:linear-gradient(155deg,#30264e,#1c1a33)}.scene-art{display:grid;min-height:8rem;place-items:center;font-size:4.5rem;line-height:1;background:radial-gradient(ellipse,#63486b,transparent 65%)}h1,h2,p{margin:0}h1{font-size:clamp(2.15rem,6vw,4rem);letter-spacing:-.065em;line-height:1.1;margin:.3rem 0 .7rem}h2{font-size:clamp(1.25rem,3vw,1.7rem);margin:.15rem 0 .45rem}.eyebrow,.stars{color:var(--gold);font-weight:800}.sub,.hint{color:var(--muted)}.sub{margin-bottom:.85rem}.progress{display:flex;justify-content:space-between;gap:.55rem;font-size:.9rem;font-weight:750}.steps{display:grid;grid-template-columns:repeat(10,1fr);gap:.25rem;margin:.6rem 0}.steps span{height:.38rem;border-radius:1rem;background:#5a4a6f}.steps .done{background:#ffca7d}.steps .current{background:#b5a0f5}.story{padding:.65rem .75rem;background:#1a182d;border-radius:.75rem;margin:.55rem 0;font-size:1.03rem}.blank{color:var(--gold);font-weight:850}.hint{font-size:.9rem;margin:.35rem 0}.tray{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;min-height:3rem}.assembled{min-height:3.55rem;padding:.4rem;margin:.45rem 0;border:1px dashed #a48ac3;border-radius:.75rem;background:#211a37}.placeholder{color:var(--muted);padding:0 .2rem;font-size:.88rem}.controls{display:flex;gap:.5rem;margin-top:.65rem}button{font:inherit;cursor:pointer;border-radius:.7rem;border:1px solid #8a76a6;background:#43335d;color:var(--ink);padding:.48rem .68rem;min-height:44px;font-weight:700}button:enabled:hover{background:#594575}button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button:disabled{opacity:.48;cursor:default}.primary{background:var(--gold);color:#2b2034;border-color:#e9aa63;flex:1}.primary:enabled:hover{background:#ffe5b7}.start{width:100%}.assembled button{background:#62507c}.feedback{background:#302542;border-radius:.75rem;padding:.55rem .75rem;margin-top:.65rem}.feedback strong{color:#ffdba8}.feedback p{margin-top:.18rem}.stars{font-size:2rem;letter-spacing:.1em}.review{padding-left:1.3rem}.review li{margin:.38rem 0}.quiet{font-size:.86rem;color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:599px){main{padding-top:.7rem}.layout{grid-template-columns:1fr;gap:.55rem}.scene{display:grid;grid-template-columns:3.2rem 1fr;column-gap:.65rem;padding:.55rem .75rem;align-items:center}.scene-art{min-height:3rem;font-size:2.05rem;grid-row:span 2}.steps{margin:.32rem 0 0}.scene .quiet{display:none}}
+.wedding{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:clamp(9rem,25vh,14rem);margin:0 0 .7rem;border:1px solid #9c7fab;border-radius:1rem;background:radial-gradient(ellipse at 50% 100%,#ffcb95 0%,#aa6d93 39%,#3b2b59 76%)}
+.wedding::before{content:"";position:absolute;inset:10% max(14%,2rem) -24%;border:.24rem solid #f5ca98;border-radius:48% 48% 0 0;background:radial-gradient(ellipse at bottom,#ffdeaa88,transparent 68%);box-shadow:0 0 0 .4rem #f5ca9830,0 0 30px #ffcb9580;z-index:-1}
+.couple{display:flex;align-items:center;justify-content:center;gap:clamp(.3rem,2.5vw,1rem);font-size:clamp(3.1rem,9vw,5.8rem);line-height:1.12;filter:drop-shadow(0 .35rem .35rem #4d294f99);padding:1rem .65rem 0}
+.heart{font-size:.42em;color:#8e345d;text-shadow:0 0 13px #fff5d0}
+.sparkle{position:absolute;color:#ffedb9;font-size:1.2rem;text-shadow:0 0 12px #ffe3ae;animation:twinkle 2.8s ease-in-out infinite alternate}
+.sparkle:nth-child(2){top:15%;left:17%}.sparkle:nth-child(3){top:22%;right:16%;animation-delay:.5s}.sparkle:nth-child(4){bottom:20%;left:11%;animation-delay:1s}.sparkle:nth-child(5){bottom:22%;right:12%;animation-delay:1.4s}
+.ending-line{color:var(--muted);margin-bottom:.7rem}.ending-line[lang=en]{color:#ffe3ac;font-weight:750;margin-bottom:.3rem}
+@keyframes twinkle{from{opacity:.55;transform:scale(.82)}to{opacity:1;transform:scale(1.16)}}
+@media(min-width:600px) and (max-width:1100px){main{padding-top:.8rem}.layout{gap:.65rem}.card,.scene{padding:.85rem}.scene-art{min-height:6rem}.wedding{min-height:clamp(9rem,23vh,12rem)}}
+@media(prefers-reduced-motion:reduce){.sparkle{animation:none}}
+header{display:flex;justify-content:space-between;align-items:center;gap:.55rem}.menu-link{display:inline-flex;align-items:center;min-height:44px;padding:.25rem .65rem;border:1px solid #a18bb7;border-radius:.7rem;color:var(--ink);font-size:.9rem;text-decoration:none;white-space:nowrap}.menu-link:hover{text-decoration:underline}.menu-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body><main>
+<header><span>✦ 자정의 무도회</span><a class="menu-link" href="index.html">퀴즈 메뉴</a></header>
+<div class="layout">
+  <aside class="scene" aria-label="이야기 진행 상황">
+    <div class="scene-art" id="art" aria-hidden="true">🏰</div>
+    <div class="progress"><span id="chapter">무도회 준비 중</span><span id="points">0점</span></div>
+    <div class="steps" id="steps" aria-hidden="true"></div>
+    <p class="quiet">장면을 하나씩 열어 이야기를 완성해요.</p>
+  </aside>
+  <div>
+    <section class="card" id="intro">
+      <p class="eyebrow">신데렐라 · 영어 어순 게임</p><h1>자정의 무도회</h1>
+      <p class="sub">마법에 걸려 뒤섞인 이야기를 되돌려 주세요. 단어 카드를 순서대로 놓으면 다음 장면이 열려요.</p>
+      <button class="primary start" id="start">이야기 시작</button>
+    </section>
+    <section class="card" id="game" hidden>
+      <p class="eyebrow" id="round"></p><h2 id="question" tabindex="-1">카드를 순서대로 놓으세요</h2>
+      <p class="story" lang="en"><span id="before"></span><span class="blank" id="blank"></span><span id="after"></span></p>
+      <p class="hint" id="hint"></p>
+      <div class="tray assembled" id="assembled" role="group" aria-label="내가 놓은 카드"></div>
+      <div class="tray" id="bank" role="group" aria-label="고를 수 있는 카드"></div>
+      <div class="controls" id="controls"><button id="clear" disabled>지우기</button><button id="check" class="primary" disabled>정답 확인</button></div>
+      <div class="feedback" id="feedback" tabindex="-1" hidden><strong id="verdict"></strong><p id="answer" lang="en"></p><p class="quiet" id="reason"></p></div>
+      <div class="controls" id="advance" hidden><button class="primary" id="next">다음 장면</button></div>
+    </section>
+    <section class="card" id="ending" hidden>
+      <div class="wedding" role="img" aria-label="별빛이 반짝이는 아치 아래 신데렐라와 왕자가 결혼식을 올리는 모습">
+        <div class="couple" aria-hidden="true"><span>👰</span><span class="heart">♥</span><span>🤴</span></div>
+        <span class="sparkle" aria-hidden="true">✧</span><span class="sparkle" aria-hidden="true">✦</span><span class="sparkle" aria-hidden="true">✦</span><span class="sparkle" aria-hidden="true">✧</span>
+      </div>
+      <h2 id="finish" tabindex="-1">그리고 오래오래 행복하게</h2>
+      <p class="ending-line" lang="en">Cinderella married the prince, and they lived happily ever after.</p>
+      <p class="ending-line" id="ending-note"></p>
+      <p class="stars" id="stars"></p><p id="total" class="sub"></p>
+      <details id="mistakes" hidden><summary>다시 볼 장면</summary><ol class="review" id="review"></ol></details>
+      <button class="primary start" id="restart">처음부터 다시</button>
+    </section>
+  </div>
+</div></main>
+<script>
+const scenes = [
+  {name:'어린 신데렐라', art:'🕯️', before:'Once upon a time there lived Cinderella. Her mother died ', after:'. So she lived with her bad stepmother.', tokens:['she','when','was','very young'], order:[1,0,2,3], hint:'신데렐라가 아주 어렸을 때', rule:'when 뒤에 주어 she, 동사 was가 와요.'},
+  {name:'궁전의 파티', art:'🏰', before:'', after:', Cinderella wanted to go.',tokens:['was','when','there','in the castle','a party'],order:[1,2,0,4,3],hint:'궁전에서 파티가 열렸을 때 · when 뒤에 there was를 써 보세요.',rule:'「there was + 명사」로 무언가 있었다고 말해요.'},
+  {name:'새어머니의 거절', art:'🚪', before:'But her stepmother ',after:'. So Cinderella stayed home.',tokens:['her','give','a chance','didn’t'],order:[3,1,0,2],hint:'그녀에게 기회를 주지 않았어요.',rule:'didn’t + 동사원형 뒤에 받는 사람 her와 주는 것 a chance가 와요.'},
+  {name:'요정의 마법', art:'🪄', before:'But when a fairy came, she ',after:'.',tokens:['Cinderella','showed','magic'],order:[1,0,2],hint:'신데렐라에게 마법을 보여 주었어요.',rule:'showed 뒤에 보여 준 사람 Cinderella와 보여 준 것 magic이 와요.'},
+  {name:'드레스와 구두', art:'👗', before:'She ',after:'.',tokens:['offered','a beautiful dress','Cinderella','and shoes'],order:[0,2,1,3],hint:'신데렐라에게 아름다운 드레스와 구두를 건넸어요.',rule:'offered 뒤에 받는 사람 Cinderella와 건넨 물건이 와요.'},
+  {name:'무도회에 도착', art:'💃', before:'',after:', the prince fell in love with her.',tokens:['when','arrived','at','Cinderella','the party'],order:[0,3,1,2,4],hint:'신데렐라가 파티에 도착했을 때',rule:'when + Cinderella + arrived 다음에 장소 at the party가 와요.'},
+  {name:'자정을 알리는 시계', art:'🕛', before:'But ',after:', Cinderella had to go. She left a glass shoe behind.',tokens:['midnight','when','was','it'],order:[1,3,2,0],hint:'자정이 되었을 때',rule:'시각을 말할 때 it을 주어로 써요.'},
+  {name:'유리 구두의 주인', art:'👠', before:'',after:', she ',tokens:['when','finally found','the prince','Cinderella'],order:[0,2,1,3],hint:'왕자가 마침내 신데렐라를 찾았을 때 · 찾은 사람은 왕자예요.',rule:'the prince가 주어이고 Cinderella는 왕자가 찾은 사람이에요.'},
+  {name:'비밀 이야기', art:'💬', before:'When the prince finally found Cinderella, she ',after:'.',tokens:['told','her secrets','the prince'],order:[0,2,1],hint:'왕자에게 자신의 비밀을 이야기했어요.',rule:'told 뒤에 듣는 사람 the prince와 이야기한 내용 her secrets가 와요.'},
+  {name:'마지막 장면', art:'💍', before:'',after:', she forgave her stepmother and lived happily ever after.',tokens:['when','married the prince','Cinderella'],order:[0,2,1],hint:'신데렐라가 왕자와 결혼했을 때',rule:'when 뒤에 주어 Cinderella와 동사 married가 와요.'}
+];
+const $ = id => document.getElementById(id);
+let index = 0, chosen = [], misses = [], score = 0, graded = false;
+const ticks = scenes.map(() => document.createElement('span'));
+$('steps').append(...ticks);
+
+function clause(scene, order) {
+  const text = order.map(i => scene.tokens[i]).join(' ');
+  return scene.before || !text ? text : text[0].toUpperCase() + text.slice(1);
+}
+
+function drawCards(focusId) {
+  const scene = scenes[index];
+  function card(i, placed) {
+    const button = document.createElement('button');
+    button.textContent = scene.tokens[i];
+    button.lang = 'en';
+    button.dataset.token = i;
+    button.disabled = graded;
+    button.addEventListener('click', () => {
+      chosen = placed ? chosen.filter(token => token !== i) : [...chosen, i];
+      drawCards(i);
+    });
+    return button;
+  }
+  const placeholder = document.createElement('span');
+  placeholder.className = 'placeholder';
+  placeholder.textContent = '고른 카드가 여기에 놓여요.';
+  $('assembled').replaceChildren(...(chosen.length ? chosen.map(i => card(i, true)) : [placeholder]));
+  const available = scene.tokens.map((_, i) => i).filter(i => !chosen.includes(i));
+  $('bank').replaceChildren(...available.map(i => card(i, false)));
+  $('clear').disabled = !chosen.length || graded;
+  $('check').disabled = available.length > 0 || graded;
+  if (focusId !== undefined) {
+    const focusTarget = $('bank').querySelector(`[data-token="${focusId}"]`) || $('bank').firstElementChild || $('check');
+    focusTarget.focus({preventScroll:true});
+  }
+}
+
+function updateProgress(completed) {
+  $('points').textContent = `${score}점`;
+  ticks.forEach((tick, i) => {
+    tick.classList.toggle('done', i < completed);
+    tick.classList.toggle('current', i === completed);
+  });
+}
+
+function showScene() {
+  const scene = scenes[index];
+  chosen = [];
+  graded = false;
+  $('art').textContent = scene.art;
+  $('chapter').textContent = `${index + 1} / ${scenes.length} 장면`;
+  $('round').textContent = `${index + 1}번 · ${scene.name}`;
+  $('before').textContent = scene.before;
+  $('blank').textContent = `[ ${index + 1} ]`;
+  $('after').textContent = scene.after;
+  $('hint').textContent = scene.hint;
+  $('feedback').hidden = true;
+  $('advance').hidden = true;
+  $('controls').hidden = false;
+  updateProgress(index);
+  drawCards();
+  $('question').focus({preventScroll:true});
+}
+
+function startGame() {
+  index = 0;
+  score = 0;
+  misses = [];
+  $('intro').hidden = true;
+  $('ending').hidden = true;
+  $('game').hidden = false;
+  showScene();
+}
+
+function finishGame() {
+  const correct = scenes.length - misses.length;
+  const stars = correct === scenes.length ? 3 : correct >= 7 ? 2 : 1;
+  $('art').textContent = '💍';
+  $('chapter').textContent = '이야기 완성';
+  $('stars').textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+  $('stars').setAttribute('aria-label', `별 ${stars}개`);
+  $('ending-note').textContent = ['호박 마차는 먼저 퇴근했지만, 결혼식에는 늦지 않았어요!', '유리 구두를 찾고 결혼식까지 도착했어요!', '무도회의 문법 마법사가 결혼식의 마지막 장면을 열었어요!'][stars - 1];
+  $('total').textContent = `${scenes.length}문제 중 ${correct}문제 정답 · ${score}점`;
+  $('review').replaceChildren(...misses.map(({scene, number, given}) => {
+    const item = document.createElement('li');
+    item.value = number;
+    const title = document.createElement('strong');
+    title.textContent = scene.name;
+    item.append(title);
+    for (const [label, text] of [['내가 놓은 순서',given],['정답',clause(scene,scene.order)]]) {
+      const line = document.createElement('div');
+      const english = document.createElement('span');
+      english.lang = 'en';
+      english.textContent = text;
+      line.append(`${label} · `,english);
+      item.append(line);
+    }
+    return item;
+  }));
+  $('mistakes').hidden = !misses.length;
+  $('mistakes').open = false;
+  $('game').hidden = true;
+  $('ending').hidden = false;
+  $('finish').focus();
+}
+
+$('start').addEventListener('click',startGame);
+$('restart').addEventListener('click',startGame);
+$('clear').addEventListener('click',() => { chosen = []; drawCards(); $('bank').firstElementChild.focus(); });
+$('check').addEventListener('click',() => {
+  const scene = scenes[index];
+  if (graded || chosen.length !== scene.tokens.length) return;
+  graded = true;
+  const correct = scene.order.every((token,i) => chosen[i] === token);
+  if (correct) score += 100;
+  else misses.push({scene, number:index + 1, given:clause(scene,chosen)});
+  $('verdict').textContent = correct ? '정답! +100점' : '마법이 살짝 꼬였어요. 정답을 확인해요!';
+  $('answer').textContent = scene.before + clause(scene,scene.order) + scene.after.replace(/she $/,'she …');
+  $('reason').textContent = scene.rule;
+  $('blank').textContent = clause(scene,chosen);
+  $('feedback').hidden = false;
+  $('controls').hidden = true;
+  $('advance').hidden = false;
+  $('next').textContent = index === scenes.length - 1 ? '엔딩 보기' : '다음 장면';
+  updateProgress(index + 1);
+  drawCards();
+  $('feedback').focus();
+});
+$('next').addEventListener('click',() => {
+  if (!graded) return;
+  index += 1;
+  if (index === scenes.length) finishGame();
+  else showScene();
+});
+</script>
+</body></html>
